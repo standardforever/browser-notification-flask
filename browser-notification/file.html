@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <ul id="request-list"></ul>
+    
+    <script>
+        const websocket = new WebSocket("ws://localhost:8000/ws");
+        const requestList = document.getElementById("request-list");
+        
+        websocket.onmessage = function(event) {
+            const newRequest = document.createElement("li");
+            newRequest.innerText = event.data;
+            requestList.appendChild(newRequest);
+            
+            // Trigger a beep notification (adjust the code for your desired beep sound)
+            const beep = new Audio("./static/notification-sound.mp3");
+            beep.play();
+        };
+    </script>
+</body>
+</html>
